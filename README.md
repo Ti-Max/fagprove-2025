@@ -67,6 +67,8 @@ mix test
 
 ## 🚀 Deployment
 
+Deploy is triggered on push to master.
+
 Deployment is done via [Fly.io](https://fly.io/) using a Docker image defined in the `Dockerfile`.
 
 ### To deploy:
