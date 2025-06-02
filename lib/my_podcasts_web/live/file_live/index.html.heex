@@ -1,0 +1,92 @@
+<.header class="text-center">
+  All Files
+  <:subtitle>All downloaded files by category</:subtitle>
+</.header>
+
+<div class="flex justify-between my-4">
+  <div class="flex gap-2">
+    <.link patch={~p"/"}>
+      <.button>New Podcast</.button>
+    </.link>
+
+    <div :if={@category}>
+      <a target="_blank" href={~p"/rss_feed/#{@category.rss_feed}"}>
+        <.button style_type={:secondary}>
+          Open RSS Feed
+        </.button>
+      </a>
+    </div>
+  </div>
+  <.form :let={f} for={%{}} phx-change="change_category">
+    <.input
+      field={f[:category]}
+      value={if(@category, do: @category.name, else: "")}
+      type="select"
+      options={format_categories(@categories)}
+    />
+  </.form>
+</div>
+
+<div :if={@no_results?}>No downloads here yet :(</div>
+<div id="files-table" phx-update="stream" class="space-y-4 overflow-y-auto">
+  <div
+    :for={{dom_id, file} <- @streams.files}
+    class="flex gap-4 items-center justify-between"
+    id={dom_id}
+  >
+    <div class="flex gap-4 min-w-0">
+      <div class="relative shrink-0 basis-40">
+        <img src={file.thumbnail} class="rounded" />
+        <div class="absolute font-semibold bottom-1 right-1 rounded bg-black/70 text-white py-0.5 px-1 text-xs">
+          {seconds_to_human(file.duration)}
+        </div>
+      </div>
+
+      <div class="w-full min-w-0">
+        <p class="text-lg font-semibold truncate text-zinc-700" title={file.title}>
+          {file.title}
+        </p>
+
+        <%= if file.description do %>
+          <p class="line-clamp-3 text-sm text-zinc-600 font-medium" title={file.description}>
+            {file.description}
+          </p>
+        <% else %>
+          <span class="italic text-zinc-500">No description</span>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <a href={Downloader.get_accessible_url(file.hash)} download title="download">
+        <.icon name="hero-arrow-down-tray" />
+      </a>
+      <.link
+        id={"delete-#{file.id}"}
+        phx-click={JS.push("delete", value: %{id: file.id}) |> hide("##{dom_id}")}
+        data-confirm="Are you sure you want to delete this audio file?"
+        title="delete"
+      >
+        <.icon name="hero-trash" />
+      </.link>
+      <button id={"edit-#{file.id}"} phx-value-id={file.id} phx-click="open_edit_modal">
+        <.icon name={if file.category_id, do: "hero-bookmark-solid", else: "hero-bookmark"} />
+      </button>
+    </div>
+  </div>
+</div>
+
+<.modal
+  :if={@edit_category_modal_opened?}
+  id="edit-category-modal"
+  show
+  on_cancel={JS.push("close_edit_modal")}
+>
+  <.live_component
+    module={MyPodcastsWeb.EditCategory}
+    id="edit_file"
+    file={@file}
+    categories={@categories}
+    user={@current_user}
+  />
+</.modal>

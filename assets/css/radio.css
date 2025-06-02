@@ -1,0 +1,7 @@
+input[type="radio"] {
+  color: black;
+}
+
+input[type="radio"]:focus {
+  @apply ring-black;
+}

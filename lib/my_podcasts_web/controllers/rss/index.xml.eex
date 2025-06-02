@@ -1,0 +1,17 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title><%= @category_name %></title>
+    <description></description>
+    <link><%= static_url(@conn, "/") %></link>
+    <%= for file <- @files do %>
+      <item>
+        <title><%= file.title %></title>
+        <description><%= file.description %></description>
+        <pubDate><%= file.inserted_at %></pubDate>
+        <guid isPermaLink="false"><%= file.id %></guid>
+        <enclosure url="<%= file_location(@conn, file.hash) %>" type="audio/mpeg"/>
+      </item>
+    <% end %>
+  </channel>
+</rss>
+

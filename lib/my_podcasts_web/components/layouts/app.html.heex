@@ -1,0 +1,81 @@
+<header class="sticky top-0 bg-white z-10">
+  <div class="flex items-center justify-between border-b border-zinc-100 py-3 text-sm">
+    <a href="/" class="text-xl px-6 font-semibold ">
+      My Podcasts
+    </a>
+    <ul class="relative z-10 flex items-center gap-4 px-4 sm:px-6 lg:px-8 justify-end space-x-4">
+      <li class="text-sm leading-6 text-zinc-900">
+        <.link
+          href={~p"/"}
+          class="text-sm leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+        >
+          New Download
+        </.link>
+      </li>
+      <li>
+        <.link
+          href={~p"/files"}
+          class="text-sm leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+        >
+          All Files
+        </.link>
+      </li>
+      <li>
+        <.link
+          href={~p"/files"}
+          class="text-sm leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+        >
+          Docs
+        </.link>
+      </li>
+    </ul>
+
+    <ul class="relative z-10 flex items-center gap-4 px-4 sm:px-6 lg:px-8 justify-end">
+      <%= if @current_user do %>
+        <li class="text-[0.8125rem] leading-6 text-zinc-900">
+          {@current_user.email}
+        </li>
+        <li>
+          <.link
+            href={~p"/users/settings"}
+            class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+          >
+            Settings
+          </.link>
+        </li>
+        <li>
+          <.link
+            href={~p"/users/log_out"}
+            method="delete"
+            class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+          >
+            Log out
+          </.link>
+        </li>
+      <% else %>
+        <li>
+          <.link
+            href={~p"/users/register"}
+            class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+          >
+            Register
+          </.link>
+        </li>
+        <li>
+          <.link
+            href={~p"/users/log_in"}
+            class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+          >
+            Log in
+          </.link>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</header>
+<main class="px-4 py-20 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-3xl">
+    <.flash_group flash={@flash} />
+    {@inner_content}
+  </div>
+</main>
