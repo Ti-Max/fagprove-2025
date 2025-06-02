@@ -77,9 +77,9 @@ flyctl deploy --remote-only --build-arg COOKIES_URL=***
 
 > Replace `***` with the URL to a `cookies.txt` file containing valid YouTube session cookies.
 
+## Storage
+With the current implementation, downloaded files are stored in the files directory on the same disk as the Phoenix server. This is not ideal, as it introduces security risks and does not scale well.
+
 ## License
 
-MIT
-
----
-
+GNU General Public License v3.0
