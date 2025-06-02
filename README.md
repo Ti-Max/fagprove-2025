@@ -1,6 +1,6 @@
-# 📺 Fagprove
+# My Podcasts
 
-Fagprove is a [Phoenix LiveView](https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.html) application backed by a PostgreSQL database. It uses `yt-dlp` for downloading YouTube audio and leverages Nix and Docker for a reproducible development environment.
+My Podcasts is a [Phoenix LiveView](https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.html) application backed by a PostgreSQL database. It uses `yt-dlp` for downloading YouTube audio and leverages Nix and Docker for a reproducible development environment.
 
 ---
 
