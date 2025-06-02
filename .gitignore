@@ -47,6 +47,6 @@ npm-debug.log
 .DS_Store
 
 # downloaded files
-files/
+/files/
 
 cookies.txt
