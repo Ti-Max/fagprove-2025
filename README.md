@@ -1,27 +1,81 @@
-# Fagprove
-This is a Phoenix LiveView Application with PostgreSQL on the Backend.
+# 📺 Fagprove
 
-## Installation
-- Nix is used to manage development environment. Follow the instruction on their web site https://nixos.org/download/.
-- Install [direnv](https://direnv.net/) to manage environment variables
-- Create `.envrc` file. See `.envrc.example`
-- Add `cookies.txt` to the root directory (See Yt-dlp section down below)
-- Run `direnv allow .` in the root directory. Nix will download Elixir, yt-dlp and other nessasery tool to run the application
-- Install [docker](https://www.docker.com/get-started/).
-- Run `just up` to start the Postgress database
-- In another terminal window run following commands: 
-    - Run `mix setup` to install and setup dependencies
-    - Run `mix ecto.setup` to setup the database
-    - Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
-- Now you can visit [`localhost:4000`](http://localhost:4000) from your browser!
+Fagprove is a [Phoenix LiveView](https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.html) application backed by a PostgreSQL database. It uses `yt-dlp` for downloading YouTube audio and leverages Nix and Docker for a reproducible development environment.
+
+---
+
+## ⚙️ Installation
+
+### 1. Prerequisites
+
+* **Nix**: Install Nix to manage the development environment. Follow the instructions at [nixos.org/download](https://nixos.org/download/).
+* **direnv**: Install [direnv](https://direnv.net/) to manage environment variables.
+* **Docker**: Install [Docker](https://www.docker.com/get-started/) to run PostgreSQL.
+
+### 2. Setup Steps
+
+1. Copy `.envrc.example` to `.envrc` and adjust as needed.
+
+2. Add a valid `cookies.txt` file to the root directory (see [Yt-dlp section](#yt-dlp)).
+
+3. In the root directory, run:
+
+   ```sh
+   direnv allow .
+   ```
+
+   This will trigger Nix to download Elixir, `yt-dlp`, and other necessary tools.
+
+4. Start PostgreSQL with:
+
+   ```sh
+   just up
+   ```
+
+5. In another terminal window, run:
+
+   ```sh
+   mix setup         # installs and sets up dependencies
+   mix ecto.setup    # sets up the database
+   mix phx.server    # starts the Phoenix server
+   ```
+
+6. Visit [http://localhost:4000](http://localhost:4000) in your browser.
+
+---
 
 ## Yt-dlp
-This app uses [yt-dlp](https://github.com/yt-dlp/yt-dlp/tree/master) to download audio files from YouTube. Since YouTube tries blocks automated requests, you may need to export cookies from your local browser. Be carefull not to share them with anyone else. Se this guide on how to do it: https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp
 
-## Tests
-You can run test with `mix tests` command.
+This app uses [`yt-dlp`](https://github.com/yt-dlp/yt-dlp) to download audio from YouTube. Due to YouTube's restrictions on automated requests, you'll need to export cookies from your browser and save them to a file named `cookies.txt` in the project root.
 
-## Deployment
-Deployment is done via [Fly.io](https://fly.io/). It uses docker image defined in `Dockerfile`.
-To deploy, run the following command: `flyctl deploy --remote-only --build-arg COOKIES_URL=***`
-Note: you need to pass a link to a txt file with valid cookies
+> ⚠️ **Do not share your cookies file — it contains sensitive session data.**
+
+Follow this guide to export cookies:
+[How do I pass cookies to yt-dlp?](https://github.com/yt-dlp/yt-dlp/wiki/FAQ#how-do-i-pass-cookies-to-yt-dlp)
+
+---
+
+## 🧪 Running Tests
+
+To run tests:
+
+```sh
+mix test
+```
+
+---
+
+## 🚀 Deployment
+
+Deployment is done via [Fly.io](https://fly.io/) using a Docker image defined in the `Dockerfile`.
+
+### To deploy:
+
+```sh
+flyctl deploy --remote-only --build-arg COOKIES_URL=***
+```
+
+> Replace `***` with the URL to a `cookies.txt` file containing valid YouTube session cookies.
+
+---
+
