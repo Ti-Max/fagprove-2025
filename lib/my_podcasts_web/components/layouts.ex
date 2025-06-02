@@ -10,5 +10,5 @@ defmodule MyPodcastsWeb.Layouts do
   """
   use MyPodcastsWeb, :html
 
-  embed_templates "layouts/*"
+  embed_templates("layouts/*")
 end

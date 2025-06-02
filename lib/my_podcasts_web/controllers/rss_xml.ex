@@ -5,5 +5,5 @@ defmodule MyPodcastsWeb.RssXML do
   defp file_location(conn, hash),
     do: static_url(conn, Downloader.get_accessible_url(hash))
 
-  embed_templates "rss/*"
+  embed_templates("rss/*")
 end

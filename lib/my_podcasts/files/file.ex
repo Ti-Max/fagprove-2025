@@ -3,13 +3,13 @@ defmodule MyPodcasts.Files.File do
   import Ecto.Changeset
 
   schema "files" do
-    field :description, :string
-    field :title, :string
-    field :hash, :string
-    field :thumbnail, :string
-    field :duration, :integer
-     belongs_to :category, MyPodcasts.Files.Category
-    belongs_to :user, MyPodcasts.Accounts.User
+    field(:description, :string)
+    field(:title, :string)
+    field(:hash, :string)
+    field(:thumbnail, :string)
+    field(:duration, :integer)
+    belongs_to(:category, MyPodcasts.Files.Category)
+    belongs_to(:user, MyPodcasts.Accounts.User)
 
     timestamps(type: :utc_datetime)
   end

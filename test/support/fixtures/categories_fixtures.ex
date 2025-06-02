@@ -12,7 +12,7 @@ defmodule MyPodcasts.CategoriesFixtures do
       attrs
       |> Enum.into(%{
         name: "category name",
-        rss_feed: "rss feed",
+        rss_feed: "rss feed"
       })
       |> MyPodcasts.Categories.create_category()
 
