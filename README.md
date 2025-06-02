@@ -77,5 +77,9 @@ flyctl deploy --remote-only --build-arg COOKIES_URL=***
 
 > Replace `***` with the URL to a `cookies.txt` file containing valid YouTube session cookies.
 
+## License
+
+MIT
+
 ---
 
