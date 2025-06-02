@@ -85,6 +85,9 @@ defmodule MyPodcastsWeb.NewLiveTest do
       |> form("#category-form", %{category_id: category.id})
       |> render_submit()
 
+      # FIXME: make sure all concurrent requsts are done
+      Process.sleep(50)
+
       # file is updated in the database
       file = Files.get_file!(file.id)
       assert file.category_id == category.id
