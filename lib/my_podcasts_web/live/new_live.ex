@@ -56,12 +56,13 @@ defmodule MyPodcastsWeb.New do
               </div>
               <div class="flex flex-col space-between">
                 <div class="space-y-2 h-full">
-                  <h2 class="text-xl font-semibold">
+                  <h2 class="text-xl font-semibold line-clamp-[2] text-ellipsis">
                     {@file.title}
                   </h2>
                   <%= if @file.description do %>
                     <p
-                      class="line-clamp-[8] text-sm text-zinc-600 font-medium"
+                      class="line-clamp-[7] text-sm text-zinc-600 font-medium"
+                      style="word-break: break-word;"
                       title={@file.description}
                     >
                       {@file.description}
